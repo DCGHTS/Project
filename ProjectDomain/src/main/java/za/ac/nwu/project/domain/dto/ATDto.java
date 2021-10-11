@@ -14,8 +14,8 @@ public class ATDto implements Serializable
 {
     private static final long serialVersionUID = -5346853206480289868L;
 
-    private String mnemonic;
-    private String accountTypeName;
+    private String accountName;
+    private String accountDesc;
     private LocalDate creationDate;
 
     public ATDto()
@@ -23,30 +23,30 @@ public class ATDto implements Serializable
 
     }
 
-    public ATDto(String mnemonic, String accountTypeName, LocalDate creationDate) {
-        this.mnemonic = mnemonic;
-        this.accountTypeName = accountTypeName;
+    public ATDto(String accountName, String accountDesc, LocalDate creationDate) {
+        this.accountName = accountName;
+        this.accountDesc = accountDesc;
         this.creationDate = creationDate;
     }
 
     public ATDto(AccountType accountType)
     {
-        this.setAccountTypeName(accountType.getAccountTypeName());
+        this.setAccountDesc(accountType.getAccountDesc());
         this.setCreationDate(accountType.getCreationDate());
-        this.setMnemonic(accountType.getMnemonic());
+        this.setAccountName(accountType.getAccountName());
     }
 
     @ApiModelProperty(position = 1, value = "AccountType Mnemonic", name = "Mnemonic",
-            notes = "Uniquely identifies the account type", dataType = "java.lang.String",
+            notes = "Uniquely identifies the account name", dataType = "java.lang.String",
             example = "MILES", required = true)
-    public String getMnemonic() {return mnemonic;}
-    public void setMnemonic(String mnemonic) {this.mnemonic = mnemonic;}
+    public String getAccountName() {return accountName;}
+    public void setAccountName(String accountName) {this.accountName = accountName;}
 
     @ApiModelProperty(position = 2, value = "AccountType Name", name = "Name",
             notes = "The name of the AccountType", dataType = "java.lang.String",
             example = "MILES", allowEmptyValue = false, required = true)
-    public String getAccountTypeName() {return accountTypeName;}
-    public void setAccountTypeName(String accountTypeName) {this.accountTypeName = accountTypeName;}
+    public String getAccountDesc() {return accountDesc;}
+    public void setAccountDesc(String accountDesc) {this.accountDesc = accountDesc;}
 
     @ApiModelProperty(position = 3, value = "AccountType Creation Date", name = "CreationDate",
             notes = "This is the date on which the AccountType was Created", dataType = "java.lang.String",
@@ -59,25 +59,25 @@ public class ATDto implements Serializable
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ATDto that = (ATDto) o;
-        return Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTypeName, that.accountTypeName) && Objects.equals(creationDate, that.creationDate);
+        return Objects.equals(accountName, that.accountName) && Objects.equals(accountDesc, that.accountDesc) && Objects.equals(creationDate, that.creationDate);
     }
 
     @JsonIgnore
     public AccountType getAccountType()
     {
-        return new AccountType(getMnemonic(), getAccountTypeName(), getCreationDate());
+        return new AccountType(getAccountName(), getAccountDesc(), getCreationDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mnemonic, accountTypeName, creationDate);
+        return Objects.hash(accountName, accountDesc, creationDate);
     }
 
     @Override
     public String toString() {
         return "AccountTypeDto{" +
-                "mnemonic='" + mnemonic + '\'' +
-                ", accountTypeName='" + accountTypeName + '\'' +
+                "mnemonic='" + accountName + '\'' +
+                ", accountTypeName='" + accountDesc + '\'' +
                 ", creationDate=" + creationDate +
                 '}';
     }

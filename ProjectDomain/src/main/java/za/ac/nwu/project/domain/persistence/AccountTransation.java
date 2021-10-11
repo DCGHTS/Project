@@ -5,27 +5,27 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ACCOUNT_TYPE", schema = "VITRSA_SANDBOX")
+@Table(name = "Transaction", schema = "DCS")
 public class AccountTransation
 {
     @Id
-    @SequenceGenerator(name = "VIT_RSA_GENERIC_SEQ",sequenceName = "VITRSA_SANDBOX.VIT_RSA_GENERIC_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VIT_RSA_GENERIC_SEQ")
+    @SequenceGenerator(name = "GENERIC_SEQ",sequenceName = "RELATION.GENERIC_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GENERIC_SEQ")
 
     private Long transactionId;
 
     private AccountType accountType;
 
-    private Long memberId;
+    private Long personId;
 
     private Long amount;
 
     private LocalDate transactionDate;
 
-    public AccountTransation(Long transactionId, AccountType accountType, Long memberId, Long amount, LocalDate transactionDate) {
+    public AccountTransation(Long transactionId, AccountType accountType, Long personId, Long amount, LocalDate transactionDate) {
         this.transactionId = transactionId;
         this.accountType = accountType;
-        this.memberId = memberId;
+        this.personId = personId;
         this.amount = amount;
         this.transactionDate = transactionDate;
     }
@@ -35,7 +35,7 @@ public class AccountTransation
 
     }
 
-    @Column(name = "TX_ID")
+    @Column(name = "TRANSACTION_ID")
     public Long getTransactionId() {
         return transactionId;
     }
@@ -45,7 +45,7 @@ public class AccountTransation
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ACCOUNT_TYPE_ID")
+    @JoinColumn(name = "ACCOUNT_ID")
     public AccountType getAccountType() {
         return accountType;
     }
@@ -54,16 +54,16 @@ public class AccountTransation
         this.accountType = accountType;
     }
 
-    @Column(name = "MEMBER_ID")
-    public Long getMemberId() {
-        return memberId;
+    @Column(name = "PERSON_ID")
+    public Long getPersonId() {
+        return personId;
     }
 
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
+    public void setPersonId(Long personId) {
+        this.personId = personId;
     }
 
-    @Column(name = "AMOUNT")
+    @Column(name = "AMOUNTUSED")
     public Long getAmount() {
         return amount;
     }
@@ -72,7 +72,7 @@ public class AccountTransation
         this.amount = amount;
     }
 
-    @Column(name = "TX_DATE")
+    @Column(name = "DATEUSED")
     public LocalDate getTransactionDate() {
         return transactionDate;
     }
@@ -86,12 +86,12 @@ public class AccountTransation
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountTransation that = (AccountTransation) o;
-        return Objects.equals(transactionId, that.transactionId) && Objects.equals(accountType, that.accountType) && Objects.equals(memberId, that.memberId) && Objects.equals(amount, that.amount) && Objects.equals(transactionDate, that.transactionDate);
+        return Objects.equals(transactionId, that.transactionId) && Objects.equals(accountType, that.accountType) && Objects.equals(personId, that.personId) && Objects.equals(amount, that.amount) && Objects.equals(transactionDate, that.transactionDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionId, accountType, memberId, amount, transactionDate);
+        return Objects.hash(transactionId, accountType, personId, amount, transactionDate);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class AccountTransation
         return "AccountTransation{" +
                 "transactionId=" + transactionId +
                 ", accountType=" + accountType +
-                ", memberId=" + memberId +
+                ", personId=" + personId +
                 ", amount=" + amount +
                 ", transactionDate=" + transactionDate +
                 '}';
