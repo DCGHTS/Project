@@ -11,7 +11,7 @@ import java.util.Set;
 public class AccountType implements Serializable
 {
     @Id
-    @SequenceGenerator(name = "GENERIC_SEQ",sequenceName = "RELATION.GENERIC_SEQ", allocationSize = 1)
+    @SequenceGenerator(name = "GENERIC_SEQ",sequenceName = "DCS.GENERIC_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GENERIC_SEQ")
 
     private Long accountId;

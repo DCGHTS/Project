@@ -9,23 +9,23 @@ import java.util.Objects;
 public class AccountTransation
 {
     @Id
-    @SequenceGenerator(name = "GENERIC_SEQ",sequenceName = "RELATION.GENERIC_SEQ", allocationSize = 1)
+    @SequenceGenerator(name = "GENERIC_SEQ",sequenceName = "DCS.GENERIC_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GENERIC_SEQ")
 
     private Long transactionId;
 
     private AccountType accountType;
 
-    private Long personId;
+    private AccountPerson accountPerson;
 
     private Long amount;
 
     private LocalDate transactionDate;
 
-    public AccountTransation(Long transactionId, AccountType accountType, Long personId, Long amount, LocalDate transactionDate) {
+    public AccountTransation(Long transactionId, AccountType accountType, AccountPerson accountPerson, Long amount, LocalDate transactionDate) {
         this.transactionId = transactionId;
         this.accountType = accountType;
-        this.personId = personId;
+        this.accountPerson = accountPerson;
         this.amount = amount;
         this.transactionDate = transactionDate;
     }
@@ -54,13 +54,14 @@ public class AccountTransation
         this.accountType = accountType;
     }
 
-    @Column(name = "PERSON_ID")
-    public Long getPersonId() {
-        return personId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Person_ID")
+    public AccountPerson getAccountPerson() {
+        return accountPerson;
     }
 
-    public void setPersonId(Long personId) {
-        this.personId = personId;
+    public void setAccountPerson(AccountPerson personId) {
+        this.accountPerson = personId;
     }
 
     @Column(name = "AMOUNTUSED")
@@ -86,12 +87,12 @@ public class AccountTransation
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountTransation that = (AccountTransation) o;
-        return Objects.equals(transactionId, that.transactionId) && Objects.equals(accountType, that.accountType) && Objects.equals(personId, that.personId) && Objects.equals(amount, that.amount) && Objects.equals(transactionDate, that.transactionDate);
+        return Objects.equals(transactionId, that.transactionId) && Objects.equals(accountType, that.accountType) && Objects.equals(accountPerson, that.accountPerson) && Objects.equals(amount, that.amount) && Objects.equals(transactionDate, that.transactionDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionId, accountType, personId, amount, transactionDate);
+        return Objects.hash(transactionId, accountType, accountPerson, amount, transactionDate);
     }
 
     @Override
@@ -99,7 +100,7 @@ public class AccountTransation
         return "AccountTransation{" +
                 "transactionId=" + transactionId +
                 ", accountType=" + accountType +
-                ", personId=" + personId +
+                ", personId=" + accountPerson +
                 ", amount=" + amount +
                 ", transactionDate=" + transactionDate +
                 '}';
