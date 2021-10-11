@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ProjectDomain" />
+        <module name="ProjectRepository" />
+        <module name="ProjectLogic" />
+        <module name="ProjectWebSpringBoot" />
+        <module name="ProjectTranslator" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ProjectWeb" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ProjectDomain" options="-parameters" />
+      <module name="ProjectLogic" options="-parameters" />
+      <module name="ProjectRepository" options="-parameters" />
+      <module name="ProjectTranslator" options="-parameters" />
+      <module name="ProjectWeb" options="-parameters" />
+      <module name="ProjectWebSpringBoot" options="-parameters" />
+    </option>
+  </component>
+</project>
